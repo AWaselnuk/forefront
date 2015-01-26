@@ -1,0 +1,24 @@
+{
+  "name": "forefront",
+  "version": "1.0.0",
+  "description": "An opinionated Front End boilerplate and workflow generator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "front-end",
+    "client",
+    "css",
+    "javascript",
+    "html",
+    "coffeescript",
+    "ecmascript6",
+    "sass",
+    "boilerplate",
+    "generator",
+    "build"
+  ],
+  "author": "Adam Waselnuk",
+  "license": "ISC"
+}
