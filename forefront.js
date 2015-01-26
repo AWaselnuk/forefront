@@ -1,3 +1,6 @@
 #!/usr/bin/env node
+console.log('Hello Forefront!');
 
-console.log('Hello World!');
+var program = require('commander');
+
+

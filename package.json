@@ -26,5 +26,8 @@
     "build"
   ],
   "author": "Adam Waselnuk",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.6.0"
+  }
 }
