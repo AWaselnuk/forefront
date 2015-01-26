@@ -1,8 +1,14 @@
 {
   "name": "forefront",
   "version": "1.0.0",
-  "description": "An opinionated Front End boilerplate and workflow generator.",
-  "main": "index.js",
+  "description": "An opinionated command-line tool for generating front end boilerplate and workflow. ",
+  "main": "forefront.js",
+  "engines": {
+    "node": ">=0.10"
+  }
+  "bin": {
+    "forefront": "forefront.js"
+  }
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
