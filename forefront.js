@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 console.log('Hello Forefront!');
 
-var program = require('commander');
+var program = require('commander'),
+    chalk = require('chalk');
 
 
