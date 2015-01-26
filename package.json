@@ -5,10 +5,10 @@
   "main": "forefront.js",
   "engines": {
     "node": ">=0.10"
-  }
+  },
   "bin": {
     "forefront": "forefront.js"
-  }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
