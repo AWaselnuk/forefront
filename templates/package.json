@@ -1,0 +1,16 @@
+{
+  "name": "forefront package.json template",
+  "version": "",
+  "description": "",
+  "main": "",
+  "author": "",
+  "license": "",
+  "scripts": {
+    // Doctor will test that you have system dependencies installed
+    // Dependencies are: NodeJS, Ruby, SASS gem
+    "doctor": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+
+  }
+}
