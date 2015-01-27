@@ -25,21 +25,23 @@ function affirm(msg) {
 }
 
 // NPM Script Templates
+// These are scripts that will be dynamically added to package.json
+// based on user choices.
+// The remaining scripts can be found in templates/package.json
 // http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/
 var packageScriptTemplates = {
-  // Doctor will test that you have system dependencies installed
-  // Dependencies are: NodeJS, Ruby, SASS gem
-  'doctor': '',
   // Autoprefix CSS
   'autoprefixer': 'autoprefixer assets/css/*.css',
   // Compile Coffeescript,
   'coffeescript': 'coffee --join assets/js/application.js --compile src/coffeescript/*.coffee',
   // Compile EC6,
   'ec6': '6to5 src/ec6 --out-file assets/js/application.js',
+  // Compile SASS
+  'sass': 'sass src/scss/application.scss assets/css/application.css',
   // Run sass compilation and autoprefixer
-  'build:styles': 'sass src/scss/application.scss assets/css/application.css && npm run autoprefixer',
+  'build:styles': 'npm run %s && npm run autoprefixer',
   // Compile Coffeescript or EC6 compilation
-  'build:scripts': 'coffee --join assets/js/application.js --compile src/coffeescript/*.coffee',
+  'build:scripts': 'npm run %s',
   // Build everything
   'build': 'npm run build:styles && npm run build:scripts',
   // Watch for changes
@@ -55,6 +57,13 @@ var packageScriptTemplates = {
 // File paths
 var appDir = __dirname + '/';
 var workingDir = './';
+
+// CSS and JS default choices
+var cssChoice = 'sass';
+var jsChoice = 'coffeescript';
+
+// Package.json Object
+var packageJSON = {};
 
 // Prompt config
 prompt.message = '';
@@ -73,7 +82,11 @@ function setup() {
   fs.ensureDirSync(workingDir + 'assets/fonts');
   fs.ensureDirSync(workingDir + 'assets/css');
   fs.copySync(appDir + 'templates/index.html', workingDir + 'index.html');
-  fs.copySync(appDir + 'templates/package.json', workingDir + 'package.json');
+
+  // Read in the package.json template
+  packageJSON = fs.readJsonSync(appDir + 'templates/package.json');
+
+  scaffoldCSS(); // Go to next step
 }
 
 // All finished
@@ -100,17 +113,42 @@ function scaffoldCSS() {
     if (affirmative(result.answer)) {
       affirm('Okay, let\'s get Sassy!');
       copySASSTemplates();
-      // TODO: Add SASS things to npm scripts
+      cssChoice = 'sass';
     } else {
       whisper('skipping SASS setup...');
     }
+
+    scaffoldJS(); // Go to next step
   });
+}
+
+// Run the JS scaffolding
+function scaffoldJS() {
+  jsChoice = 'coffeescript';
+
+  scaffoldNPM(); // Go to next step
+}
+
+// Add scripts to NPM based on user choices
+function scaffoldNPM() {
+  // CSS Scripts
+  if (cssChoice) {
+    packageJSON['scripts'][cssChoice] = packageScriptTemplates[cssChoice];
+    packageJSON['scripts']['build:styles'] =
+      packageScriptTemplates['build:styles'].replace('%s', cssChoice);
+  }
+  // JS Scripts
+  if (jsChoice) {
+  packageJSON['scripts'][jsChoice] = packageScriptTemplates[jsChoice];
+  packageJSON['scripts']['build:scripts'] =
+    packageScriptTemplates['build:scripts'].replace('%s', jsChoice);
+  }
+  // Write out the completed package.json template
+  fs.writeJsonSync(workingDir + 'package.json', packageJSON);
+
+  teardown(); // Go to last step
 }
 
 // Start the app
 console.log();
 setup();
-scaffoldCSS();
-// scaffoldJS();
-// scaffoldNPM();
-teardown();

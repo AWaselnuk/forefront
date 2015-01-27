@@ -6,9 +6,15 @@
   "author": "",
   "license": "",
   "scripts": {
-    // Doctor will test that you have system dependencies installed
-    // Dependencies are: NodeJS, Ruby, SASS gem
-    "doctor": "echo \"Error: no test specified\" && exit 1"
+    "doctor": "",
+    "autoprefixer": "autoprefixer assets/css/*.css",
+    "build:styles": "",
+    "build:scripts": "",
+    "build": "npm run build:styles && npm run build:scripts",
+    "watch": "watch 'npm run build' src/*",
+    "serve": "browser-sync start --server --files 'assets/css/*.css, assets/js/*.js'",
+    "test": "",
+    "develop": "npm run build && npm run watch && npm run serve"
   },
   "dependencies": {
 
