@@ -28,8 +28,9 @@
   "author": "Adam Waselnuk",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^0.5.1",
+    "colors": "^1.0.3",
     "commander": "^2.6.0",
-    "fs-extra": "^0.15.0"
+    "fs-extra": "^0.15.0",
+    "prompt": "^0.2.14"
   }
 }
