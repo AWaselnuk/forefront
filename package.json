@@ -29,6 +29,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^0.5.1",
-    "commander": "^2.6.0"
+    "commander": "^2.6.0",
+    "fs-extra": "^0.15.0"
   }
 }
