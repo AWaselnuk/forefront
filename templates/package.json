@@ -12,5 +12,12 @@
   },
   "dependencies": {
 
+  },
+  "devDependencies": {
+    "autoprefixer": "latest",
+    "browser-sync": "latest",
+    "coffee-script": "latest",
+    "6to5": "latest",
+    "watch": "latest"
   }
 }

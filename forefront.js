@@ -7,7 +7,7 @@ var program = require('commander'),
     prompt = require('prompt'),
     fs = require('fs-extra');
 
-//  UI themes
+// UI themes
 function log(msg) {
   console.log(msg);
 }
@@ -23,6 +23,34 @@ function whisper(msg) {
 function affirm(msg) {
   log(msg.green);
 }
+
+// NPM Script Templates
+// http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/
+var packageScriptTemplates = {
+  // Doctor will test that you have system dependencies installed
+  // Dependencies are: NodeJS, Ruby, SASS gem
+  'doctor': '',
+  // Autoprefix CSS
+  'autoprefixer': 'autoprefixer assets/css/*.css',
+  // Compile Coffeescript,
+  'coffeescript': 'coffee --join assets/js/application.js --compile src/coffeescript/*.coffee',
+  // Compile EC6,
+  'ec6': '6to5 src/ec6 --out-file assets/js/application.js',
+  // Run sass compilation and autoprefixer
+  'build:styles': 'sass src/scss/application.scss assets/css/application.css && npm run autoprefixer',
+  // Compile Coffeescript or EC6 compilation
+  'build:scripts': 'coffee --join assets/js/application.js --compile src/coffeescript/*.coffee',
+  // Build everything
+  'build': 'npm run build:styles && npm run build:scripts',
+  // Watch for changes
+  'watch': 'watch \'npm run build\' src/*',
+  // Run a local browser-sync server
+  'serve': 'browser-sync start --server --files "assets/css/*.css, assets/js/*.js"',
+  // Run tests
+  'test': '',
+  // Do everything you need to develop
+  'develop': 'npm run build && npm run watch && npm run serve'
+};
 
 // File paths
 var appDir = __dirname + '/';
