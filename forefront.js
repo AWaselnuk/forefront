@@ -12,6 +12,10 @@ function log(msg) {
   console.log(msg);
 }
 
+function error(msg) {
+  log(msg.red);
+}
+
 function say(msg) {
   log(msg.cyan);
 }
@@ -124,9 +128,42 @@ function scaffoldCSS() {
 
 // Run the JS scaffolding
 function scaffoldJS() {
-  jsChoice = 'coffeescript';
 
-  scaffoldNPM(); // Go to next step
+  prompt.get({
+    properties: {
+      answer: {
+        description: 'What flavour of javascript would you like? (default: coffeescript) [coffeescript, ec6, js, skip]'.cyan
+      }
+    }
+  }, function (err, result) {
+    switch (result.answer.toLowerCase()) {
+      case 'skip':
+        whisper('skipping JS setup...');
+        jsChoice = null;
+        break;
+      case 'ec6':
+        affirm('EcmaScript6 ... I can see you live on the edge.');
+        jsChoice = 'ec6';
+        fs.ensureDirSync(workingDir + 'src/ec6');
+        break;
+      case 'js':
+        affirm('Nothing wrong with vanilla JavaScript!');
+        jsChoice = 'js';
+        fs.ensureDirSync(workingDir + 'src/js');
+        break;
+      case 'coffeescript':
+      case '':
+        affirm('Brewing your coffeescript setup...');
+        jsChoice = 'coffeescript';
+        fs.ensureDirSync(workingDir + 'src/coffeescript');
+        break;
+      default:
+        error('Please select "coffeescript", "ec6", "js", or "skip".');
+        scaffoldJS();
+    }
+
+    scaffoldNPM(); // Go to next step
+  });
 }
 
 // Add scripts to NPM based on user choices
