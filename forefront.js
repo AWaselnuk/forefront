@@ -37,7 +37,7 @@ var packageScriptTemplates = {
   // Autoprefix CSS
   'autoprefixer': 'autoprefixer assets/css/*.css',
   // Compile Coffeescript,
-  'coffeescript': 'coffee --join assets/js/application.js --compile src/coffeescript/*.coffee',
+  'coffeescript': 'cat src/coffeescript/*.coffee | coffee -cs > assets/js/application.js',
   // Compile es6,
   'es6': '6to5 src/es6 --out-file assets/js/application.js',
   // Compile SASS
@@ -49,7 +49,7 @@ var packageScriptTemplates = {
   // Build everything
   'build': 'npm run build:styles && npm run build:scripts',
   // Watch for changes
-  'watch': 'watch \'npm run build\' src/*',
+  'watch': 'watch \'npm run build\' src',
   // Run a local browser-sync server
   'serve': 'browser-sync start --server --files "assets/css/*.css, assets/js/*.js"',
   // Run tests
