@@ -1,5 +1,5 @@
 {
-  "name": "forefront package.json template",
+  "name": "",
   "version": "",
   "description": "",
   "main": "",
@@ -11,7 +11,7 @@
     "build:styles": "",
     "build:scripts": "",
     "build": "npm run build:styles && npm run build:scripts",
-    "watch": "watch 'npm run build' src/*",
+    "watch": "watch 'npm run build' src",
     "serve": "browser-sync start --server --files 'assets/css/*.css, assets/js/*.js'",
     "test": "",
     "develop": "npm run build && npm run watch && npm run serve"
