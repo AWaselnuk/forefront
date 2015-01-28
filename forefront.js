@@ -38,13 +38,13 @@ var packageScriptTemplates = {
   'autoprefixer': 'autoprefixer assets/css/*.css',
   // Compile Coffeescript,
   'coffeescript': 'coffee --join assets/js/application.js --compile src/coffeescript/*.coffee',
-  // Compile EC6,
-  'ec6': '6to5 src/ec6 --out-file assets/js/application.js',
+  // Compile es6,
+  'es6': '6to5 src/es6 --out-file assets/js/application.js',
   // Compile SASS
   'sass': 'sass src/scss/application.scss assets/css/application.css',
   // Run sass compilation and autoprefixer
   'build:styles': 'npm run %s && npm run autoprefixer',
-  // Compile Coffeescript or EC6 compilation
+  // Compile Coffeescript or es6 compilation
   'build:scripts': 'npm run %s',
   // Build everything
   'build': 'npm run build:styles && npm run build:scripts',
@@ -62,9 +62,9 @@ var packageScriptTemplates = {
 var appDir = __dirname + '/';
 var workingDir = './';
 
-// CSS and JS default choices
-var cssChoice = 'sass';
-var jsChoice = 'coffeescript';
+// CSS and JS choices
+var cssChoice = null;
+var jsChoice = null;
 
 // Package.json Object
 var packageJSON = {};
@@ -85,17 +85,36 @@ function setup() {
   fs.ensureDirSync(workingDir + 'assets/img');
   fs.ensureDirSync(workingDir + 'assets/fonts');
   fs.ensureDirSync(workingDir + 'assets/css');
-  fs.copySync(appDir + 'templates/index.html', workingDir + 'index.html');
-
   // Read in the package.json template
   packageJSON = fs.readJsonSync(appDir + 'templates/package.json');
+  prompt.start(); // Initialize the Node prompt
 
-  scaffoldCSS(); // Go to next step
+  scaffoldHTML(); // Go to next step
 }
 
 // All finished
 function teardown() {
   say('All Finished!');
+}
+
+// Copy index.html
+function scaffoldHTML() {
+  prompt.get({
+    properties: {
+      answer: {
+        description: 'Would you like to create index.html? (default: y)'.cyan
+      }
+    }
+  }, function (err, result) {
+    if (affirmative(result.answer)) {
+      affirm('Okay, index.html was installed!');
+      fs.copySync(appDir + 'templates/index.html', workingDir + 'index.html');
+    } else {
+      whisper('skipping index.html...');
+    }
+
+    scaffoldCSS(); // Go to next step
+  });
 }
 
 // Copy SASS Templates
@@ -106,7 +125,6 @@ function copySASSTemplates() {
 
 // Run the CSS scaffolding
 function scaffoldCSS() {
-  prompt.start();
   prompt.get({
     properties: {
       answer: {
@@ -132,7 +150,7 @@ function scaffoldJS() {
   prompt.get({
     properties: {
       answer: {
-        description: 'What flavour of javascript would you like? (default: coffeescript) [coffeescript, ec6, js, skip]'.cyan
+        description: 'What flavour of javascript would you like? (default: coffeescript) [coffeescript, es6, js, skip]'.cyan
       }
     }
   }, function (err, result) {
@@ -141,10 +159,10 @@ function scaffoldJS() {
         whisper('skipping JS setup...');
         jsChoice = null;
         break;
-      case 'ec6':
+      case 'es6':
         affirm('EcmaScript6 ... I can see you live on the edge.');
-        jsChoice = 'ec6';
-        fs.ensureDirSync(workingDir + 'src/ec6');
+        jsChoice = 'es6';
+        fs.ensureDirSync(workingDir + 'src/es6');
         break;
       case 'js':
         affirm('Nothing wrong with vanilla JavaScript!');
@@ -153,13 +171,13 @@ function scaffoldJS() {
         break;
       case 'coffeescript':
       case '':
-        affirm('Brewing your coffeescript setup...');
+        affirm('Brewing coffeescript...');
         jsChoice = 'coffeescript';
         fs.ensureDirSync(workingDir + 'src/coffeescript');
         break;
       default:
-        error('Please select "coffeescript", "ec6", "js", or "skip".');
-        scaffoldJS();
+        error('Please select "coffeescript", "es6", "js", or "skip".');
+        return scaffoldJS(); // Repeat this step
     }
 
     scaffoldNPM(); // Go to next step
@@ -187,5 +205,9 @@ function scaffoldNPM() {
 }
 
 // Start the app
-console.log();
+// setup() should step through these in order:
+// scaffoldHTML() -> scaffoldCSS() -> scaffoldJS() -> scaffoldNPM() -> teardown()
 setup();
+
+
+
