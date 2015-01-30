@@ -14,7 +14,7 @@
     "watch": "watch 'npm run build' src",
     "serve": "browser-sync start --server --files 'assets/css/*.css, assets/js/*.js'",
     "test": "",
-    "develop": "npm run build && npm run watch && npm run serve"
+    "develop": "npm run build && parallelshell 'npm run watch' 'npm run serve'"
   },
   "dependencies": {
 
@@ -22,8 +22,7 @@
   "devDependencies": {
     "autoprefixer": "latest",
     "browser-sync": "latest",
-    "coffee-script": "latest",
-    "6to5": "latest",
+    "parallelshell": "latest",
     "watch": "latest"
   }
 }

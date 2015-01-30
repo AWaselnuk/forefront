@@ -58,6 +58,15 @@ var packageScriptTemplates = {
   'develop': 'npm run build && npm run watch && npm run serve'
 };
 
+// devDependency templates
+// These are devDependencies that will be dynamically added to package.json
+// based on user choices. It maps the user choice (key) to the name of the
+// dependency required for that choice
+var devDependencyTemplates = {
+  'coffeescript': 'coffee-script',
+  'es6': '6to5'
+}
+
 // File paths
 var appDir = __dirname + '/';
 var workingDir = './';
@@ -80,7 +89,7 @@ function affirmative(answer) {
 
 // Setup the initial directories and files
 function setup() {
-  log('Welcome to Forefront!'.white.bold.bgCyan);
+  log('Welcome to Forefront!'.white.bold.bgMagenta);
   fs.ensureDirSync(workingDir + 'assets/js');
   fs.ensureDirSync(workingDir + 'assets/img');
   fs.ensureDirSync(workingDir + 'assets/fonts');
@@ -194,9 +203,10 @@ function scaffoldNPM() {
   }
   // JS Scripts
   if (jsChoice) {
-  packageJSON['scripts'][jsChoice] = packageScriptTemplates[jsChoice];
-  packageJSON['scripts']['build:scripts'] =
-    packageScriptTemplates['build:scripts'].replace('%s', jsChoice);
+    packageJSON['scripts'][jsChoice] = packageScriptTemplates[jsChoice];
+    packageJSON['scripts']['build:scripts'] =
+      packageScriptTemplates['build:scripts'].replace('%s', jsChoice);
+    packageJSON['devDependencies'][(devDependencyTemplates[jsChoice])] = 'latest';
   }
   // Write out the completed package.json template
   fs.writeJsonSync(workingDir + 'package.json', packageJSON);
