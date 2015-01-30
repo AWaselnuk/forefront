@@ -93,10 +93,15 @@ function affirmative(answer) {
 // Setup the initial directories and files
 function setup() {
   log('Welcome to Forefront!'.white.bold.bgMagenta);
+  // Create or copy non-optional templates and directories
   fs.ensureDirSync(workingDir + 'assets/js');
   fs.ensureDirSync(workingDir + 'assets/img');
   fs.ensureDirSync(workingDir + 'assets/fonts');
   fs.ensureDirSync(workingDir + 'assets/css');
+  fs.copySync(appDir + 'templates/FOREFRONT_INSTRUCTIONS.md', workingDir + 'FOREFRONT_INSTRUCTIONS.md');
+  fs.copySync(appDir + 'templates/README.md', workingDir + 'README.md');
+  // TODO: Provide a default .gitignore template
+  // fs.copySync(appDir + 'templates/.gitignore', workingDir + '.gitignore');
   // Read in the package.json template
   packageJSON = fs.readJsonSync(appDir + 'templates/package.json');
   prompt.start(); // Initialize the Node prompt
