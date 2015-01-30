@@ -2,8 +2,11 @@
 
 'use strict';
 
-var program = require('commander'),
-    colors = require('colors'),
+// NOTE: To parse command line options, check out commander:
+// https://www.npmjs.com/package/commander
+// Right now this is not required, but it could very well be in the future.
+
+var colors = require('colors'),
     prompt = require('prompt'),
     fs = require('fs-extra');
 
