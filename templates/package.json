@@ -6,7 +6,7 @@
   "author": "",
   "license": "",
   "scripts": {
-    "doctor": "",
+    "doctor": "npm -v && ruby -v && sass -v && echo 'READY TO ROCK!' || echo 'MISSING DEPENDENCY. Make sure you have installed npm, ruby, and sass.'",
     "autoprefixer": "autoprefixer assets/css/*.css",
     "build:styles": "",
     "build:scripts": "",
