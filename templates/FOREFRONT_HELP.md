@@ -8,5 +8,5 @@ Forefront provides you with npm scripts to run powerful development tools.
 * **npm run build** Runs **build:styles** and **build:scripts**.
 * **npm run watch** Starts watching your working files in the /src directory. Any changes to those files will automatically trigger **build**
 * **npm run serve** Fires up a [BrowserSync](http://www.browsersync.io/) server.
-* **npm run test** Runs [Jasmine](http://jasmine.github.io/2.0/introduction.html) specs in the /spec folder.
+* **npm run test** Runs [Jasmine](http://jasmine.github.io/2.0/introduction.html) specs in the /spec folder using the Karma test runner (coming soon).
 * **npm run develop** Runs **build**, **watch**, and **serve**. This is the recommended starting point for development!
