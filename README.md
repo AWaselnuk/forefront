@@ -28,7 +28,7 @@ One day I was setting up my usual workflow with [GruntJS](http://gruntjs.com/) a
 ## To Do:
 
 * If other Front End developers show interest in this tool, I would make modifications to provide more customization options and modules.
-* Work towards version 1. See Issues for items that need to still need to be completed and features I may be adding.
+* Work towards version 1. [See the issues on Github](https://github.com/AWaselnuk/forefront/issues) for items that need to still need to be completed and features I may be adding.
 
 ## License
 
