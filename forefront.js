@@ -122,7 +122,7 @@ function scaffoldREADME() {
     }
   }, function (err, result) {
     if (affirmative(result.answer)) {
-      affirm('Okay, README.md was installed!');
+      affirm('Okay, README.md was created!');
       fs.copySync(appDir + 'templates/README.md', workingDir + 'README.md');
     } else {
       whisper('skipping README.md template...');
@@ -137,15 +137,15 @@ function scaffoldHTML() {
   prompt.get({
     properties: {
       answer: {
-        description: 'Would you like to create index.html? (default: y)'.cyan
+        description: 'Would you like to create an index.html template? (default: y)'.cyan
       }
     }
   }, function (err, result) {
     if (affirmative(result.answer)) {
-      affirm('Okay, index.html was installed!');
+      affirm('Okay, index.html was created!');
       fs.copySync(appDir + 'templates/index.html', workingDir + 'index.html');
     } else {
-      whisper('skipping index.html...');
+      whisper('skipping index.html template...');
     }
 
     scaffoldCSS(); // Go to next step
