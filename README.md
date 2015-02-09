@@ -2,11 +2,18 @@
 
 An opinionated command-line tool for generating front end boilerplate and workflow.
 
-**NOTE: THIS PROJECT IS NOT COMPLETE**
-
 ## Getting Started
 
-TODO: Write this section.
+To use Forefront, install it globally with npm.
+
+    npm install forefront --global
+
+You can now use Forefront to scaffold front end tools for new projects by running the `forefront` command.
+For example, to create a new project about Ninja Turtles, I would type the following in my terminal:
+
+    mkdir ninja-turtles
+    cd ninja-turtles
+    forefront
 
 ## Why did you make this?
 
@@ -18,10 +25,10 @@ So when I say it is 'opinionated', I basically mean that I made it for myself.
 
 One day I was setting up my usual workflow with [GruntJS](http://gruntjs.com/) and I thought to myself: 'This seems to be a lot of dependencies to install simply to repeat what NPM can already do.' As it turns out, [I was not the first person to think this](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/).
 
-## TODO:
+## To Do:
 
 * If other Front End developers show interest in this tool, I would make modifications to provide more customization options and modules.
-* Provide an option to install third party frameworks (i.e. Bootstrap, jQuery, etc.)
+* Work towards version 1. See Issues for items that need to still need to be completed and features I may be adding.
 
 ## License
 
