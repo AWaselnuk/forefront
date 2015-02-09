@@ -98,20 +98,38 @@ function setup() {
   fs.ensureDirSync(workingDir + 'assets/img');
   fs.ensureDirSync(workingDir + 'assets/fonts');
   fs.ensureDirSync(workingDir + 'assets/css');
-  fs.copySync(appDir + 'templates/FOREFRONT_INSTRUCTIONS.md', workingDir + 'FOREFRONT_INSTRUCTIONS.md');
-  fs.copySync(appDir + 'templates/README.md', workingDir + 'README.md');
-  // TODO: Provide a default .gitignore template
-  // fs.copySync(appDir + 'templates/.gitignore', workingDir + '.gitignore');
+  fs.copySync(appDir + 'templates/FOREFRONT_HELP.md', workingDir + 'FOREFRONT_HELP.md');
+
   // Read in the package.json template
   packageJSON = fs.readJsonSync(appDir + 'templates/package.json');
   prompt.start(); // Initialize the Node prompt
 
-  scaffoldHTML(); // Go to next step
+  scaffoldREADME(); // Go to next step
 }
 
 // All finished
 function teardown() {
   say('All Finished!');
+}
+
+// Copy README.md
+function scaffoldREADME() {
+  prompt.get({
+    properties: {
+      answer: {
+        description: 'Would you like to create a README.md template? (default: y)'.cyan
+      }
+    }
+  }, function (err, result) {
+    if (affirmative(result.answer)) {
+      affirm('Okay, README.md was installed!');
+      fs.copySync(appDir + 'templates/README.md', workingDir + 'README.md');
+    } else {
+      whisper('skipping README.md template...');
+    }
+
+    scaffoldHTML(); // Go to next step
+  });
 }
 
 // Copy index.html
@@ -224,7 +242,7 @@ function scaffoldNPM() {
 
 // Start the app
 // setup() should step through these in order:
-// scaffoldHTML() -> scaffoldCSS() -> scaffoldJS() -> scaffoldNPM() -> teardown()
+// scaffoldREADME() -> scaffoldHTML() -> scaffoldCSS() -> scaffoldJS() -> scaffoldNPM() -> teardown()
 setup();
 
 
