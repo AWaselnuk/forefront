@@ -25,7 +25,11 @@
     "generator",
     "build"
   ],
-  "author": "Adam Waselnuk",
+  "author": {
+    "name": "Adam Waselnuk",
+    "email": "adam.waselnuk@gmail.com",
+    "url": "http://www.adamwaselnuk.com"
+  },
   "license": "ISC",
   "dependencies": {
     "colors": "^1.0.3",
