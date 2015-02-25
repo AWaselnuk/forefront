@@ -117,7 +117,7 @@ function scaffoldREADME() {
   prompt.get({
     properties: {
       answer: {
-        description: 'Would you like to create a README.md template? (default: y)\n'.cyan
+        description: 'Would you like to create a README.md template?\n(default: y)'.cyan
       }
     }
   }, function (err, result) {
@@ -137,7 +137,7 @@ function scaffoldHTML() {
   prompt.get({
     properties: {
       answer: {
-        description: 'Would you like to create an index.html template? (default: y)'.cyan
+        description: 'Would you like to create an index.html template?\n(default: y)'.cyan
       }
     }
   }, function (err, result) {
@@ -163,7 +163,7 @@ function scaffoldCSS() {
   prompt.get({
     properties: {
       answer: {
-        description: 'Would you like to use SASS? (default: y)'.cyan
+        description: 'Would you like to use SASS?\n(default: y)'.cyan
       }
     }
   }, function (err, result) {
@@ -185,7 +185,7 @@ function scaffoldJS() {
   prompt.get({
     properties: {
       answer: {
-        description: 'What flavour of javascript would you like? (default: coffeescript) [coffeescript, es6, js, skip]'.cyan
+        description: 'What flavour of javascript would you like? [coffeescript, es6, js, skip]\n(default: coffeescript)'.cyan
       }
     }
   }, function (err, result) {
