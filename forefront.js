@@ -42,7 +42,7 @@ var packageScriptTemplates = {
   // Compile Coffeescript,
   'coffeescript': 'cat src/coffeescript/*.coffee | coffee -cs > assets/js/application.js',
   // Compile es6,
-  'es6': '6to5 src/es6 --out-file assets/js/application.js',
+  'es6': 'babel src/es6 --out-file assets/js/application.js',
   // Compile SASS
   'sass': 'sass src/scss/application.scss assets/css/application.css',
   // Run sass compilation and autoprefixer
@@ -67,7 +67,7 @@ var packageScriptTemplates = {
 // dependency required for that choice
 var devDependencyTemplates = {
   'coffeescript': 'coffee-script',
-  'es6': '6to5'
+  'es6': 'babel'
 }
 
 // File paths
@@ -117,7 +117,7 @@ function scaffoldREADME() {
   prompt.get({
     properties: {
       answer: {
-        description: 'Would you like to create a README.md template? (default: y)'.cyan
+        description: 'Would you like to create a README.md template? (default: y)\n'.cyan
       }
     }
   }, function (err, result) {
